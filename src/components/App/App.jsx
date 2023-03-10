@@ -28,14 +28,17 @@ export const App = () => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
+  const contactsUpd = newContact => {
+    setContacts(prevContactns => {
+      return [newContact, ...prevContactns];
+    });
+  };
+
   return (
     <Container>
       <GlobalStyles />
       <Header>Phonebook</Header>
-      <ContactForm
-        contacts={contacts}
-        contactsUpd={newContact => setContacts([newContact, ...contacts])}
-      />
+      <ContactForm contacts={contacts} contactsUpd={contactsUpd} />
       {contacts.length !== 0 ? (
         <>
           <SubHeader>Contacts</SubHeader>
@@ -80,11 +83,11 @@ export const App = () => {
 //   //   this.setState({ [name]: value });
 //   // };
 
-//   // contactsUpd = newContact => {
-//   //   this.setState(({ contacts }) => {
-//   //     return { contacts: [newContact, ...contacts] };
-//   //   });
-//   // };
+// contactsUpd = newContact => {
+//   this.setState(({ contacts }) => {
+//     return { contacts: [newContact, ...contacts] };
+//   });
+// };
 
 //   // onContactDelete = id => {
 //   //   this.setState(({ contacts }) => ({
